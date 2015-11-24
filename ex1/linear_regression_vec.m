@@ -9,8 +9,8 @@ function [f,g] = linear_regression_vec(theta, X,y)
   m=size(X,2);
   
   % initialize objective value and gradient.
-  f = 0;
-  g = zeros(size(theta));
+  %f = 0;
+  %g = zeros(size(theta));
 
   %
   % TODO:  Compute the linear regression objective function and gradient 

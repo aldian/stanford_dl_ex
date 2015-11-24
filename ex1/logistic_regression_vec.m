@@ -9,8 +9,8 @@ function [f,g] = logistic_regression_vec(theta, X,y)
   m=size(X,2);
   
   % initialize objective value and gradient.
-  f = 0;
-  g = zeros(size(theta));
+  %f = 0;
+  %g = zeros(size(theta));
   
 
   %
@@ -19,3 +19,9 @@ function [f,g] = logistic_regression_vec(theta, X,y)
   %        Store the objective function value in 'f', and the gradient in 'g'.
   %
 %%% YOUR CODE HERE %%%
+%size theta: 785, 1
+%size X: 785, 12665
+%size y: 1, 12665
+h = sigmoid(theta' * X); % size: 1, 12665 
+f = -y * log(h') - (1 - y) * log(1 - h'); 
+g = X * (h' - y');
