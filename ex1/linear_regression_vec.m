@@ -18,3 +18,9 @@ function [f,g] = linear_regression_vec(theta, X,y)
   %        Store the objective function value in 'f', and the gradient in 'g'.
   %
 %%% YOUR CODE HERE %%%
+%size X: 14, 400
+%size theta: 14, 1
+%size y: 1, 400
+h_min_y = theta' * X - y;
+f = h_min_y * h_min_y' / 2;
+g = X * h_min_y';
