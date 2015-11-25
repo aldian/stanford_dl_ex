@@ -27,6 +27,34 @@ function [f,g] = softmax_regression(theta, X,y)
   %        Before returning g, make sure you form it back into a vector with g=g(:);
   %
 %%% YOUR CODE HERE %%%
-  
+%size theta: 785, 9
+%size X: 785, 60000
+%size y: 1, 60000
+%num classes: 10
+
+z = theta' * X; % size: 9, 60000
+exp_z = exp(z); % size: 9, 60000
+normalizer = sum(exp_z); % size: 1, 60000
+p = exp_z ./ repmat(normalizer, num_classes - 1, 1); % size: 9, 60000
+
+% This loop over classes is slower then loop over training data below
+%for k=1:num_classes-1
+%    f = -sum(log(p(k, y == k)));
+%    g(:, k) = -X(:, y == k) * (1 - p(k, y == k))' + X(:, y ~= k) * p(k, y ~= k)';
+%end
+
+for i=1:m
+    xi = X(:, i); % size 785, 1
+    yi = y(i);
+    for k=1:num_classes-1
+        if yi == k
+            f = f - log(p(k, i));
+            g(:, k) = g(:, k) - xi * (1 - p(k, i));
+        else
+            g(:, k) = g(:, k) + xi * p(k, i);
+        end
+    end
+end
+
   g=g(:); % make gradient a vector for minFunc
 
